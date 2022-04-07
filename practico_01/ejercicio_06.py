@@ -49,10 +49,9 @@ def numeros_al_final_sorted(lista: List[Union[float, str]]) -> List[Union[float,
     """Re-escribir utilizando la función sorted con una custom key.
     Referencia: https://docs.python.org/3/library/functions.html#sorted
     """
-    nuevaLista = sorted(lista, key=str)
+    nuevaLista = sorted(lista, key=lambda a: type(a) == int)
     print(nuevaLista)
     return nuevaLista
-    pass  # Completar
 
 
 # NO MODIFICAR - INICIO
