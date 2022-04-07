@@ -16,7 +16,6 @@ def multiplicar_basico(numeros: Iterable[float]) -> float:
         for numero in numeros:
             resultado = resultado * numero
     return resultado
-    pass  # Completar
 
 
 # NO MODIFICAR - INICIO
