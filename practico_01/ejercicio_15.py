@@ -182,4 +182,3 @@ result, elapsed = calcular_posibilidades(lista, limite)
 print(f"Tiempo: {elapsed:2.8f} segundos - Con Memoized - 3ra ejecución")
 assert result == 28671512
 # NO MODIFICAR - FIN
-
