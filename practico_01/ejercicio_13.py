@@ -73,5 +73,3 @@ assert next(generador_pares) == 4
 
 
 # NO MODIFICAR - FIN
-
-

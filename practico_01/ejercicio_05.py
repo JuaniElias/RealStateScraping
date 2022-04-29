@@ -1,6 +1,7 @@
 """Bucle FOR y Reduce."""
 
 from typing import Iterable
+from functools import reduce
 
 
 def multiplicar_basico(numeros: Iterable[float]) -> float:
@@ -24,13 +25,12 @@ assert multiplicar_basico([2, 5]) == 10
 assert multiplicar_basico([]) == 0
 assert multiplicar_basico([1, 2, 3, 0, 4, 5]) == 0
 assert multiplicar_basico(range(1, 20)) == 121_645_100_408_832_000
+
+
 # NO MODIFICAR - FIN
 
 
 ###############################################################################
-
-
-from functools import reduce
 
 
 def multiplicar_reduce(numeros: Iterable[float]) -> float:

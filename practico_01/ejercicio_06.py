@@ -58,6 +58,3 @@ assert numeros_al_final_sorted([3, "a", 1, "b", 10, "j"]) == ["a", "b", "j", 3, 
 
 
 # NO MODIFICAR - FIN
-
-
-
