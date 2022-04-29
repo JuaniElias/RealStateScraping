@@ -43,7 +43,7 @@ assert result == 28671512
 from functools import partial
 
 
-def medir_tiempo1(func: Callable[[], int]) -> Tuple[int, float]:
+def medir_tiempo(func: Callable[[], int]) -> Tuple[int, float]:
     """Toma una función y devuelve una dupla conteniendo en su primer elemento
     el resultado de la función y en su segundo elemento el tiempo de ejecución.
     Restricción: La función no debe tomar parámetros y por lo tanto se
@@ -56,7 +56,7 @@ def medir_tiempo1(func: Callable[[], int]) -> Tuple[int, float]:
 
 
 # NO MODIFICAR - INICIO
-result, elapsed = medir_tiempo1(partial(calcular_posibilidades, lista, limite))
+result, elapsed = medir_tiempo(partial(calcular_posibilidades, lista, limite))
 print(f"Tiempo: {elapsed:2.2f} segundos - Usando Partial")
 assert result == 28671512
 
@@ -67,24 +67,23 @@ assert result == 28671512
 ###############################################################################
 
 
-def medir_tiempo2(func: Callable[[Sequence[int], int], int]) -> Callable[[Sequence[int], int], Tuple[int, float]]:
+def medir_tiempo(func: Callable[[Sequence[int], int], int]) -> Callable[[Sequence[int], int], Tuple[int, float]]:
     """Re-Escribir utilizando closures de forma tal que la función no requiera
     partial. En este caso se debe devolver una función que devuelva la tupla y
     tome una cantidad arbitraria de parámetros.
     """
 
-    def closureFunction(*arbitraria):
-        lista2 = []
-        permutaciones = func(*arbitraria)
-        lista2.append(permutaciones)
-        lista2.append(perf_counter() - elapsed)
-        return tuple(lista2)
+    def inner(*arbitraria):
+        start = perf_counter()
+        result = func(*arbitraria)
+        elapsed = perf_counter() - start
+        return result, elapsed
 
-    return closureFunction
+    return inner
 
 
 # NO MODIFICAR - INICIO
-calcular_posibilidades_nueva = medir_tiempo2(calcular_posibilidades)
+calcular_posibilidades_nueva = medir_tiempo(calcular_posibilidades)
 result, elapsed = calcular_posibilidades_nueva(lista, limite)
 print(f"Tiempo: {elapsed:2.2f} segundos - Decorador")
 assert result == 28671512
@@ -102,24 +101,23 @@ Este es un ejemplo y no hay que escribir código.
 """
 
 
-def medir_tiempo3(func: Callable[[Sequence[int], int], int]) -> Callable[[Sequence[int], int], Tuple[int, float]]:
+def medir_tiempo(func: Callable[[Sequence[int], int], int]) -> Callable[[Sequence[int], int], Tuple[int, float]]:
     """Re-Escribir utilizando closures de forma tal que la función no requiera
     partial. En este caso se debe devolver una función que devuelva la tupla y
     tome una cantidad arbitraria de parámetros.
     """
 
-    def closureFunction(*arbitraria):
-        lista2 = []
-        permutaciones = func(*arbitraria)
-        lista2.append(permutaciones)
-        lista2.append(perf_counter() - elapsed)
-        return tuple(lista2)
+    def inner(*arbitraria):
+        start = perf_counter()
+        result = func(*arbitraria)
+        elapsed = perf_counter() - start
+        return result, elapsed
 
-    return closureFunction
+    return inner
 
 
 # NO MODIFICAR - INICIO
-@medir_tiempo3
+@medir_tiempo
 def calcular_posibilidades(lista: Sequence[int], limite: int) -> int:
     count = 0
     for i in range(limite):
@@ -148,11 +146,18 @@ def memoized(func):
     tiempo para la función calcular posibilidades. Prestar atención a los tiempo
     de ejecución
     """
+    cache = dict()
 
-    pass  # Completar
+    def memoized_inner(*args):
+        if args[1] in cache:
+            return cache[args[1]]
+        result = func(*args)
+        cache[args[1]] = result
+        return result
+    return memoized_inner
 
 
-@medir_tiempo3
+@medir_tiempo
 @memoized
 def calcular_posibilidades(lista: Sequence[int], limite: int) -> int:
     count = 0
