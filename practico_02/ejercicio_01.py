@@ -18,6 +18,10 @@ Referencia: https://docs.python.org/3/reference/import.html#the-import-system
 """
 
 # Completar
+from pathlib import Path
+import main
+from source import util
+import source.controller.controller as controller
 
 
 # NO MODIFICAR - INICIO
