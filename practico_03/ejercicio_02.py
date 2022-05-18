@@ -9,8 +9,14 @@ class Articulo:
         - Utilizar sólamente el constructor (__init__) y un método de
           clase (@classmethod) con una variable de clase
     """
+    id_ = 1
+    _last_id = None
 
-    # Completar
+    def __init__(self, nombre=None):
+        self.nombre = nombre
+        self.id_ = Articulo.id_
+        Articulo.id_ += 1
+        Articulo._last_id = self.id_
 
 
 # NO MODIFICAR - INICIO
