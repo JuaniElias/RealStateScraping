@@ -1,4 +1,4 @@
-"""Constructor, Variables de instancia y métodos de instacia"""
+"""Constructor, Variables de instancia y métodos de instancia"""
 
 from typing import Optional
 
@@ -8,7 +8,15 @@ class Rectangulo:
     Implementar la clase Rectangulo que contiene una base y una altura, y el
     método area.
     """
-    # Completar
+
+    def __init__(self, base=None, altura=None):
+        self.base = base
+        self.altura = altura
+
+    def area(self):
+        if (self.base or self.altura) is None:
+            return 0
+        return self.base * self.altura
 
 
 # NO MODIFICAR - INICIO
