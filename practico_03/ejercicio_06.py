@@ -23,6 +23,7 @@ class Article:
     def __repr__(self):
         return f"Article('{self.name}')"
 
+
 # NO MODIFICAR - INICIO
 class ShoppingCart:
     """Agregar los métodos que sean necesarios para que los test funcionen.
@@ -65,6 +66,7 @@ class ShoppingCart:
 
     def __add__(self, other: ShoppingCart):
         return ShoppingCart(self.articles + other.articles)
+
 
 # NO MODIFICAR - INICIO
 
