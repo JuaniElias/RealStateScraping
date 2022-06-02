@@ -46,4 +46,3 @@ def reset_tabla(func):
 
 
 # NO MODIFICAR - FIN
-
