@@ -3,12 +3,10 @@
 
 class Auto:
     """La clase auto tiene dos propiedades, precio y nombre. El nombre se define
-    obligatoriamente al construir la clase y siempre que se devuelve, se 
+    obligatoriamente al construir la clase y siempre que se devuelve, se
     devuelve con la primera letra en mayúscula y no se puede modificar. El precio
     puede modificarse, pero cuando se muestra, se redondea a 2 decimales
-    
     Restricción: Usar Properties
-    
     Referencia: https://docs.python.org/3/library/functions.html#property"""
 
     def __init__(self, marca: str, precio: float = 0):

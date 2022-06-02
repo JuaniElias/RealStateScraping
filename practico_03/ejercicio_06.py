@@ -78,7 +78,7 @@ assert str(ShoppingCart().add(manzana).add(pera)) == "['Manzana', 'Pera']"
 
 # Test de reproducibilidad
 carrito = ShoppingCart().add(manzana).add(pera)
-#assert carrito == eval(repr(carrito))
+assert carrito == eval(repr(carrito))
 # Test de igualdad
 assert ShoppingCart().add(manzana) == ShoppingCart().add(manzana)
 
