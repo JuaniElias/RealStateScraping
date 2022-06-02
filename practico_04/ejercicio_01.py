@@ -21,7 +21,6 @@ def crear_tabla():
        ALTURA INTEGER
     );"""
     cursor.execute(sql)
-    print("Table created successfully........")
     conn.commit()
     conn.close()
 
@@ -31,11 +30,7 @@ def borrar_tabla():
     anteriormente."""
     conn = sqlite3.connect('example.db')
     cursor = conn.cursor()
-    try:
-        cursor.execute("DROP TABLE persona")
-        print("Table dropped successfully.........")
-    except sqlite3.OperationalError as exception:
-        print(exception)
+    cursor.execute("DROP TABLE if exists persona")
     conn.commit()
     conn.close()
 
@@ -52,5 +47,3 @@ def reset_tabla(func):
 
 # NO MODIFICAR - FIN
 
-crear_tabla()
-borrar_tabla()
