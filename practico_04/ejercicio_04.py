@@ -16,7 +16,6 @@ def buscar_persona(id_persona):
     cursor = conn.cursor()
     sql_select = f"select * from persona where persona.idpersona = {id_persona};"
     cursor.execute(sql_select)
-    filas_modificadas = cursor.rowcount
     pers_selecc = cursor.fetchone()
     if pers_selecc is None:
         return False
@@ -24,7 +23,6 @@ def buscar_persona(id_persona):
     cursor.close()
     conn.close()
     pers_selecc = (id, nombre, nacimiento, dni, altura)
-    print(pers_selecc)
     return pers_selecc
 
 
