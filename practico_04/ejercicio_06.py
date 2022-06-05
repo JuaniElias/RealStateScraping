@@ -14,7 +14,7 @@ def crear_tabla_peso():
     cursor = conn.cursor()
     sql = """CREATE TABLE if not exists PERSONAPESO (
            IDPERSONA integer primary key,
-           FECHA date,
+           FECHA datetime,
            PESO integer not null,
            foreign key (IDPERSONA) references PERSONA(IDPERSONA)
         );"""
@@ -29,7 +29,7 @@ def borrar_tabla_peso():
     anteriormente."""
     conn = sqlite3.connect('example.db')
     cursor = conn.cursor()
-    sql = """DELETE PERSONAPESO if exists;"""
+    sql = """DROP TABLE if exists PERSONAPESO;"""
     cursor.execute(sql)
     conn.commit()
     cursor.close()
