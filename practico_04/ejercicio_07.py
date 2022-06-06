@@ -1,6 +1,6 @@
 """Base de Datos SQL - Uso de múltiples tablas"""
 
-import datetime
+import datetime as dt
 import sqlite3
 
 from practico_04.ejercicio_02 import agregar_persona
@@ -27,16 +27,17 @@ def agregar_peso(id_persona, fecha, peso):
     sql = """INSERT INTO PERSONAPESO (IDPERSONA, FECHA, PESO)
             VALUES (?,?,?);"""
     sql_consultar_fecha = f"""SELECT FECHA FROM PERSONAPESO WHERE IDPERSONA = {id_persona}"""
-    fecha_valida = cursor_peso.execute(sql_consultar_fecha).fetchone()
     flag = False
-    if buscar_persona(id_persona) and fecha_valida is None:
-        cursor.execute(sql, (id_persona, fecha, peso))
-        fecha_valida = datetime.datetime.strptime(cursor_peso.execute(sql_consultar_fecha).fetchone()[0],
-                                                  '%Y-%m-%d %H:%M:%S')
-        flag = True
-    if buscar_persona(id_persona) and fecha_valida > fecha:
-        cursor.execute(sql, (id_persona, fecha, peso))
-        flag = True
+    if buscar_persona(id_persona):
+        if cursor_peso.execute(sql_consultar_fecha).fetchone():
+            fecha_valida = dt.datetime.strptime(cursor_peso.execute(sql_consultar_fecha).fetchone()[0],
+                                                '%Y-%m-%d %H:%M:%S')
+            if fecha_valida < fecha:
+                cursor.execute(sql, (id_persona, fecha, peso))
+                flag = True
+        else:
+            cursor.execute(sql, (id_persona, fecha, peso))
+            flag = True
     conn.commit()
     cursor.close()
     cursor_peso.close()
@@ -47,12 +48,12 @@ def agregar_peso(id_persona, fecha, peso):
 # NO MODIFICAR - INICIO
 @reset_tabla
 def pruebas():
-    id_juan = agregar_persona('juan perez', datetime.datetime(1988, 5, 15), 32165498, 180)
-    assert agregar_peso(id_juan, datetime.datetime(2018, 5, 26), 80) > 0
+    id_juan = agregar_persona('juan perez', dt.datetime(1988, 5, 15), 32165498, 180)
+    assert agregar_peso(id_juan, dt.datetime(2018, 5, 26), 80) > 0
     # Test Id incorrecto
-    assert agregar_peso(200, datetime.datetime(1988, 5, 15), 80) == False
+    assert agregar_peso(200, dt.datetime(1988, 5, 15), 80) is False
     # Test Registro previo al 2018-05-26
-    assert agregar_peso(id_juan, datetime.datetime(2018, 5, 16), 80) == False
+    assert agregar_peso(id_juan, dt.datetime(2018, 5, 16), 80) is False
 
 
 if __name__ == '__main__':
