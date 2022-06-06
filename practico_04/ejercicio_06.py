@@ -14,7 +14,7 @@ def crear_tabla_peso():
     cursor = conn.cursor()
     sql = """CREATE TABLE if not exists PERSONAPESO (
            IDPERSONA integer primary key,
-           FECHA datetime,
+           FECHA datetime primary key,
            PESO integer not null,
            foreign key (IDPERSONA) references PERSONA(IDPERSONA)
         );"""

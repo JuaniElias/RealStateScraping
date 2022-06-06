@@ -8,12 +8,12 @@ from practico_04.ejercicio_07 import agregar_peso
 
 
 def listar_pesos(id_persona):
-    """Implementar la funcion listar_pesos, que devuelva el historial de pesos 
+    """Implementar la función listar_pesos, que devuelva el historial de pesos
     para una persona dada.
 
     Debe validar:
     - Que el ID de la persona ingresada existe (reutilizando las funciones ya 
-     mplementadas).
+     implementadas).
 
     Debe devolver:
     - Lista de (fecha, peso), donde fecha esta representado por el siguiente 
@@ -28,7 +28,7 @@ def listar_pesos(id_persona):
         ('2018-05-01', 82),
     ]
 
-    - False en caso de no cumplir con alguna validacion.
+    - False en caso de no cumplir con alguna validación.
     """
     return []
 
@@ -46,7 +46,7 @@ def pruebas():
     ]
     assert pesos_juan == pesos_esperados
     # id incorrecto
-    assert listar_pesos(200) == False
+    assert listar_pesos(200) is False
 
 
 if __name__ == '__main__':
