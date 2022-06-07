@@ -19,10 +19,12 @@ def buscar_persona(id_persona):
     pers_selecc = cursor.fetchone()
     if pers_selecc is None:
         return False
-    id, nombre, nacimiento, dni, altura = pers_selecc[0], pers_selecc[1], datetime.datetime.strptime(pers_selecc[2], '%Y-%m-%d %H:%M:%S'), pers_selecc[3], pers_selecc[4]
+    id_per, nombre, nacimiento, dni, altura = \
+        pers_selecc[0], pers_selecc[1], datetime.datetime.strptime(pers_selecc[2], '%Y-%m-%d %H:%M:%S'),\
+        pers_selecc[3], pers_selecc[4]
     cursor.close()
     conn.close()
-    pers_selecc = (id, nombre, nacimiento, dni, altura)
+    pers_selecc = (id_per, nombre, nacimiento, dni, altura)
     return pers_selecc
 
 
