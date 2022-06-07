@@ -13,9 +13,10 @@ def crear_tabla_peso():
     conn = sqlite3.connect('example.db')
     cursor = conn.cursor()
     sql = """CREATE TABLE if not exists PERSONAPESO (
-           IDPERSONA integer primary key,
-           FECHA datetime primary key,
+           IDPERSONA integer,
+           FECHA date,
            PESO integer not null,
+           primary key (IDPERSONA, FECHA),
            foreign key (IDPERSONA) references PERSONA(IDPERSONA)
         );"""
     cursor.execute(sql)
