@@ -5,8 +5,8 @@ from ejercicio_01 import borrar_tabla, crear_tabla
 
 
 def crear_tabla_peso():
-    """Implementar la funcion crear_tabla_peso, que cree una tabla PersonaPeso con:
-        - IdPersona: Int() (Clave Foranea Persona)
+    """Implementar la función crear_tabla_peso, que cree una tabla PersonaPeso con:
+        - IdPersona: Int() (Clave Foránea Persona)
         - Fecha: Date()
         - Peso: Int()
     """
@@ -26,7 +26,7 @@ def crear_tabla_peso():
 
 
 def borrar_tabla_peso():
-    """Implementar la funcion borrar_tabla, que borra la tabla creada 
+    """Implementar la función borrar_tabla, que borra la tabla creada
     anteriormente."""
     conn = sqlite3.connect('example.db')
     cursor = conn.cursor()

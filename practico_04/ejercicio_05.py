@@ -9,8 +9,8 @@ from ejercicio_04 import buscar_persona
 
 
 def actualizar_persona(id_persona, nombre, nacimiento, dni, altura):
-    """Implementar la funcion actualizar_persona, que actualiza un registro de
-    una persona basado en su id. Devuelve un booleano en base a si encontro el
+    """Implementar la función actualizar_persona, que actualiza un registro de
+    una persona basado en su id. Devuelve un booleano con base a si encontró el
     registro y lo actualizo o no."""
     conn = sqlite3.connect('example.db')
     cursor = conn.cursor()

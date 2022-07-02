@@ -7,7 +7,7 @@ from ejercicio_01 import reset_tabla
 
 
 def agregar_persona(nombre, nacimiento, dni, altura):
-    """Implementar la funcion agregar_persona, que inserte un registro en la 
+    """Implementar la función agregar_persona, que inserte un registro en la
     tabla Persona y devuelva los datos ingresados el id del nuevo registro."""
     conn = sqlite3.connect('example.db')
     cursor = conn.cursor()

@@ -8,8 +8,8 @@ from ejercicio_02 import agregar_persona
 
 
 def borrar_persona(id_persona):
-    """Implementar la funcion borrar_persona, que elimina un registro en la 
-    tabla Persona. Devuelve un booleano en base a si encontro el registro y lo 
+    """Implementar la función borrar_persona, que elimina un registro en la
+    tabla Persona. Devuelve un booleano en base a si encontró el registro y lo
     borro o no."""
     conn = sqlite3.connect('example.db')
     cursor = conn.cursor()

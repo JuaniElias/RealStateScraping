@@ -9,18 +9,18 @@ from ejercicio_06 import reset_tabla
 
 
 def agregar_peso(id_persona, fecha, peso):
-    """Implementar la funcion agregar_peso, que inserte un registro en la tabla 
+    """Implementar la función agregar_peso, que inserte un registro en la tabla
     PersonaPeso.
 
     Debe validar:
-    - Que el ID de la persona ingresada existe (reutilizando las funciones ya 
+    - Que el ID de la persona ingresada existe (reutilizando las funciones ya
         implementadas).
-    - Que no existe de esa persona un registro de fecha posterior al que 
+    - Que no existe de esa persona un registro de fecha posterior al que
         queremos ingresar.
 
     Debe devolver:
     - ID del peso registrado.
-    - False en caso de no cumplir con alguna validacion."""
+    - False en caso de no cumplir con alguna validación."""
 
     conn = sqlite3.connect('example.db')
     cursor = cursor_peso = conn.cursor()
