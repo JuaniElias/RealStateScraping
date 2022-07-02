@@ -1,7 +1,7 @@
 """Base de Datos SQL - Creación de tablas auxiliares"""
 import sqlite3
 
-from practico_04.ejercicio_01 import borrar_tabla, crear_tabla
+from ejercicio_01 import borrar_tabla, crear_tabla
 
 
 def crear_tabla_peso():

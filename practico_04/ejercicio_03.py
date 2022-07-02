@@ -3,8 +3,8 @@
 import datetime
 import sqlite3
 
-from practico_04.ejercicio_01 import reset_tabla
-from practico_04.ejercicio_02 import agregar_persona
+from ejercicio_01 import reset_tabla
+from ejercicio_02 import agregar_persona
 
 
 def borrar_persona(id_persona):
