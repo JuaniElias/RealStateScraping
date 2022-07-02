@@ -13,11 +13,11 @@ def listar_pesos(id_persona):
     para una persona dada.
 
     Debe validar:
-    - Que el ID de la persona ingresada existe (reutilizando las funciones ya 
+    - Que el ID de la persona ingresada existe (reutilizando las funciones ya
      implementadas).
 
     Debe devolver:
-    - Lista de (fecha, peso), donde fecha esta representado por el siguiente 
+    - Lista de (fecha, peso), donde fecha esta representado por el siguiente
     formato: AAAA-MM-DD.
 
     Ejemplo:
