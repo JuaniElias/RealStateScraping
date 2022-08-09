@@ -6,69 +6,82 @@ from ejercicio_01 import Base, Socio
 
 from typing import List, Optional
 
-# an Engine, which the Session will use for connection
-# resources, typically in module scope
-engine = create_engine('postgresql://scott:tiger@localhost/')
-
-# a sessionmaker(), also in the same scope as the engine
-Session = sessionmaker(engine)
-
-# we can now construct a Session() without needing to pass the
-# engine each time
-"""with Session() as session:
-    session.add(some_object)
-    session.add(some_other_object)
-    session.commit()
-"""
-# closes the session
-
 
 class DatosSocio():
 
     def __init__(self):
-        self.engine = create_engine('sqlite:///my_base.db')
-        self.engine.create(Socio)
-        Base.metadata.create_all(self.engine)
-        self.sessionmaker = sessionmaker(bind=self.engine)
+        engine = create_engine('sqlite:///socios.db')
+        Base.metadata.bind = engine
+        Base.metadata.create_all(engine)
+        db_session = sessionmaker()
+        db_session.bind = engine
+        self.session = db_session()
 
     def buscar(self, id_socio: int) -> Optional[Socio]:
         """Devuelve la instancia del socio, dado su id. Devuelve None si no 
         encuentra nada.
         """
-        pass  # Completar
+        try:
+            socio = self.session.query(Socio).filter_by(id_socio=id_socio).one()
+
+            return socio
+
+        except:
+            return None
 
     def buscar_dni(self, dni_socio: int) -> Optional[Socio]:
         """Devuelve la instancia del socio, dado su dni. Devuelve None si no 
         encuentra nada.
         """
-        pass  # Completar
+        try:
+            socio = self.session.query(Socio).filter(Socio.dni == dni_socio).first()
+
+            return socio
+
+        except:
+            return None
 
     def todos(self) -> List[Socio]:
         """Devuelve listado de todos los socios en la base de datos."""
-        pass  # Completar
+        socios = self.session.query(Socio).all()
+
+        return socios
 
     def borrar_todos(self) -> bool:
         """Borra todos los socios de la base de datos. Devuelve True si el 
         borrado fue exitoso.
         """
-        pass  # Completar
+        try:
+            self.session.query(Socio).delete()
+            return True
+
+        except:
+            return False
 
     def alta(self, socio: Socio) -> Socio:
         """Agrega un nuevo socio a la tabla y lo devuelve"""
-
-        pass  # Completar
+        self.session.add(socio)
+        self.session.commit()
+        return socio
 
     def baja(self, id_socio: int) -> bool:
         """Borra el socio especificado por el id. Devuelve True si el borrado 
         fue exitoso.
         """
-        pass  # Completar
+        socio = self.buscar(id_socio)
+        self.session.delete(socio)
+        return True
 
     def modificacion(self, socio: Socio) -> Socio:
         """Guarda un socio con sus datos modificados. Devuelve el Socio 
         modificado.
         """
-        pass  # Completar
+        old_socio = self.buscar(socio.id_socio)
+        old_socio.dni = socio.dni
+        old_socio.nombre = socio.nombre
+        old_socio.apellido = socio.apellido
+        self.session.commit()
+        return old_socio
 
     def contar_socios(self) -> int:
         """Devuelve el total de socios que existen en la tabla"""
