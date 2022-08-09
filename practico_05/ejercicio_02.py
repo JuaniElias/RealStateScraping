@@ -6,11 +6,30 @@ from ejercicio_01 import Base, Socio
 
 from typing import List, Optional
 
+# an Engine, which the Session will use for connection
+# resources, typically in module scope
+engine = create_engine('postgresql://scott:tiger@localhost/')
+
+# a sessionmaker(), also in the same scope as the engine
+Session = sessionmaker(engine)
+
+# we can now construct a Session() without needing to pass the
+# engine each time
+"""with Session() as session:
+    session.add(some_object)
+    session.add(some_other_object)
+    session.commit()
+"""
+# closes the session
+
 
 class DatosSocio():
 
     def __init__(self):
-        pass  # Completar
+        self.engine = create_engine('sqlite:///my_base.db')
+        self.engine.create(Socio)
+        Base.metadata.create_all(self.engine)
+        self.sessionmaker = sessionmaker(bind=self.engine)
 
     def buscar(self, id_socio: int) -> Optional[Socio]:
         """Devuelve la instancia del socio, dado su id. Devuelve None si no 
@@ -36,6 +55,7 @@ class DatosSocio():
 
     def alta(self, socio: Socio) -> Socio:
         """Agrega un nuevo socio a la tabla y lo devuelve"""
+
         pass  # Completar
 
     def baja(self, id_socio: int) -> bool:
