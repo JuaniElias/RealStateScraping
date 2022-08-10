@@ -21,25 +21,18 @@ class DatosSocio():
         """Devuelve la instancia del socio, dado su id. Devuelve None si no 
         encuentra nada.
         """
-        try:
-            socio = self.session.query(Socio).filter_by(id_socio=id_socio).one()
+        socio = self.session.query(Socio).filter_by(id_socio=id_socio).one_or_none()
 
-            return socio
+        return socio
 
-        except:
-            return None
 
     def buscar_dni(self, dni_socio: int) -> Optional[Socio]:
         """Devuelve la instancia del socio, dado su dni. Devuelve None si no 
         encuentra nada.
         """
-        try:
-            socio = self.session.query(Socio).filter(Socio.dni == dni_socio).first()
+        socio = self.session.query(Socio).filter(Socio.dni == dni_socio).first()
 
-            return socio
-
-        except:
-            return None
+        return socio
 
     def todos(self) -> List[Socio]:
         """Devuelve listado de todos los socios en la base de datos."""
@@ -68,9 +61,12 @@ class DatosSocio():
         """Borra el socio especificado por el id. Devuelve True si el borrado 
         fue exitoso.
         """
-        socio = self.buscar(id_socio)
-        self.session.delete(socio)
-        return True
+        try:
+            socio = self.buscar(id_socio)
+            self.session.delete(socio)
+            return True
+        except:
+            return False
 
     def modificacion(self, socio: Socio) -> Socio:
         """Guarda un socio con sus datos modificados. Devuelve el Socio 
@@ -85,24 +81,26 @@ class DatosSocio():
 
     def contar_socios(self) -> int:
         """Devuelve el total de socios que existen en la tabla"""
-        pass  # Completar
+        cant_socios = self.session.query(Socio).count()
+        return cant_socios
 
 
 # NO MODIFICAR - INICIO
 
 # Test Creación
-datos = DatosSocio()
 
+datos = DatosSocio()
+datos.borrar_todos()
 # Test Alta
 socio = datos.alta(Socio(dni=12345678, nombre='Juan', apellido='Perez'))
-assert socio.id > 0
+assert socio.id_socio > 0
 
 # Test Baja
-assert datos.baja(socio.id)
+assert datos.baja(socio.id_socio)
 
 # Test Consulta
 socio_2 = datos.alta(Socio(dni=12345679, nombre='Carlos', apellido='Perez'))
-assert datos.buscar(socio_2.id) == socio_2
+assert datos.buscar(socio_2.id_socio) == socio_2
 
 # Test Buscar DNI
 socio_2 = datos.alta(Socio(dni=12345670, nombre='Carlos', apellido='Perez'))
@@ -114,14 +112,14 @@ socio_3.nombre = 'Moria'
 socio_3.apellido = 'Casan'
 socio_3.dni = 13264587
 datos.modificacion(socio_3)
-socio_3_modificado = datos.buscar(socio_3.id)
-assert socio_3_modificado.id == socio_3.id
+socio_3_modificado = datos.buscar(socio_3.id_socio)
+assert socio_3_modificado.id_socio == socio_3.id_socio
 assert socio_3_modificado.nombre == 'Moria'
 assert socio_3_modificado.apellido == 'Casan'
 assert socio_3_modificado.dni == 13264587
 
 # Test Conteo
-assert len(datos.todos()) == 3
+assert datos.contar_socios() == 3
 
 # Test Delete
 datos.borrar_todos()
