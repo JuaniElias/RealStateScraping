@@ -25,7 +25,6 @@ class DatosSocio():
 
         return socio
 
-
     def buscar_dni(self, dni_socio: int) -> Optional[Socio]:
         """Devuelve la instancia del socio, dado su dni. Devuelve None si no 
         encuentra nada.
