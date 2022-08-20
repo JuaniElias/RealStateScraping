@@ -100,7 +100,7 @@ class DatosSocio():
 
 
 # NO MODIFICAR - INICIO
-"""
+
 # Test Creación
 datos = DatosSocio()
 
@@ -140,4 +140,3 @@ datos.borrar_todos()
 assert len(datos.todos()) == 0
 
 # NO MODIFICAR - FIN
-"""
