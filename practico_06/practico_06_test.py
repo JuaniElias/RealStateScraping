@@ -18,7 +18,7 @@ class TestsNegocio(unittest.TestCase):
 
     def test_alta(self):
         # pre-condiciones: no hay socios registrados
-        self.assertEqual(len(self.ns.todos()), 3)
+        self.assertEqual(0, len(self.ns.todos()))
 
         # ejecuto la logica
         socio = Socio(dni=12345678, nombre='Juan', apellido='Perez')
@@ -26,7 +26,7 @@ class TestsNegocio(unittest.TestCase):
 
         # post-condiciones: 1 socio registrado
         self.assertTrue(exito)
-        self.assertEqual(len(self.ns.todos()), 1)
+        self.assertEqual(1, len(self.ns.todos()))
 
     def test_regla_1(self):
         pass

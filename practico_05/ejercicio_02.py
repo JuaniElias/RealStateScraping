@@ -1,43 +1,48 @@
-"""Base de Datos - ORM"""
-
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, true
 from sqlalchemy.orm import sessionmaker
 from practico_05.ejercicio_01 import Base, Socio
 
 from typing import List, Optional
 
 
-class DatosSocio:
+class DatosSocio():
 
     def __init__(self):
         engine = create_engine('sqlite:///socios.db')
         Base.metadata.bind = engine
-        Base.metadata.create_all(engine)
         db_session = sessionmaker()
         db_session.bind = engine
         self.session = db_session()
+        try:
+            Base.metadata.create_all(engine)
+        except Exception as e:
+            print("Error al crear tabla: ", e)
 
     def buscar(self, id_socio: int) -> Optional[Socio]:
-        """Devuelve la instancia del socio, dado su id. Devuelve None si no 
+        """Devuelve la instancia del socio, dado su id_socio. Devuelve None si no 
         encuentra nada.
         """
-        socio = self.session.query(Socio).filter_by(id_socio=id_socio).one_or_none()
-
-        return socio
+        # first()--> Returns None or the row
+        try:
+            return self.session.query(Socio).get(id_socio)
+        except Exception as e:
+            print("Error: ", e)
 
     def buscar_dni(self, dni_socio: int) -> Optional[Socio]:
         """Devuelve la instancia del socio, dado su dni. Devuelve None si no 
         encuentra nada.
         """
-        socio = self.session.query(Socio).filter(Socio.dni == dni_socio).first()
-
-        return socio
+        try:
+            return self.session.query(Socio).filter_by(dni=dni_socio).first()
+        except Exception as e:
+            print("Error: ", e)
 
     def todos(self) -> List[Socio]:
         """Devuelve listado de todos los socios en la base de datos."""
-        socios = self.session.query(Socio).all()
-
-        return socios
+        try:
+            return self.session.query(Socio).all()
+        except Exception as e:
+            print("Error: ", e)
 
     def borrar_todos(self) -> bool:
         """Borra todos los socios de la base de datos. Devuelve True si el 
@@ -45,61 +50,71 @@ class DatosSocio:
         """
         try:
             self.session.query(Socio).delete()
-            return True
-
+            rta = True
         except:
-            return False
+            rta = False
+            self.session.rollback()
+        finally:
+            self.session.commit()
+        return rta
 
     def alta(self, socio: Socio) -> Socio:
         """Agrega un nuevo socio a la tabla y lo devuelve"""
-        self.session.add(socio)
-        self.session.commit()
+        try:
+            self.session.add(socio)
+            self.session.commit()
+        except Exception as e:
+            print("Error en el alta: ", e)
         return socio
 
     def baja(self, id_socio: int) -> bool:
-        """Borra el socio especificado por el id. Devuelve True si el borrado 
+        """Borra el socio especificado por el id_socio. Devuelve True si el borrado 
         fue exitoso.
         """
         try:
-            socio = self.buscar(id_socio)
-            self.session.delete(socio)
-            return True
+            s = self.buscar(id_socio)
+            self.session.delete(s)
+            self.session.commit()
+            rta = True
         except:
-            return False
+            self.session.rollback()
+            rta = False
+        return rta
 
     def modificacion(self, socio: Socio) -> Socio:
         """Guarda un socio con sus datos modificados. Devuelve el Socio 
         modificado.
         """
-        old_socio = self.buscar(socio.id_socio)
-        old_socio.dni = socio.dni
-        old_socio.nombre = socio.nombre
-        old_socio.apellido = socio.apellido
-        self.session.commit()
-        return old_socio
+        try:
+            self.session.query(Socio).filter(Socio.id_socio == socio.id_socio).update(
+                {Socio.dni: socio.dni, Socio.nombre: socio.nombre, Socio.apellido: socio.apellido})
+            self.session.commit()
+        except:
+            self.session.rollback()
+        return socio
 
-    def contar_socios(self) -> int:
+    def contarSocios(self) -> int:
         """Devuelve el total de socios que existen en la tabla"""
-        cant_socios = self.session.query(Socio).count()
-        return cant_socios
+        rows = self.session.query(Socio).count()
+        return rows
 
 
 # NO MODIFICAR - INICIO
-
+"""
 # Test Creación
-
 datos = DatosSocio()
-datos.borrar_todos()
+
 # Test Alta
 socio = datos.alta(Socio(dni=12345678, nombre='Juan', apellido='Perez'))
 assert socio.id_socio > 0
 
 # Test Baja
-assert datos.baja(socio.id_socio)
+assert datos.baja(socio.id_socio) == True
 
 # Test Consulta
 socio_2 = datos.alta(Socio(dni=12345679, nombre='Carlos', apellido='Perez'))
-assert datos.buscar(socio_2.id_socio) == socio_2
+p = datos.buscar(socio_2.id_socio)
+assert p == socio_2
 
 # Test Buscar DNI
 socio_2 = datos.alta(Socio(dni=12345670, nombre='Carlos', apellido='Perez'))
@@ -118,10 +133,11 @@ assert socio_3_modificado.apellido == 'Casan'
 assert socio_3_modificado.dni == 13264587
 
 # Test Conteo
-assert datos.contar_socios() == 3
+assert len(datos.todos()) == 3
 
 # Test Delete
 datos.borrar_todos()
 assert len(datos.todos()) == 0
 
 # NO MODIFICAR - FIN
+"""
