@@ -7,7 +7,7 @@ from practico_05.ejercicio_01 import Base, Socio
 from typing import List, Optional
 
 
-class DatosSocio():
+class DatosSocio:
 
     def __init__(self):
         engine = create_engine('sqlite:///socios.db')

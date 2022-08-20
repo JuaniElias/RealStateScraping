@@ -18,7 +18,7 @@ class TestsNegocio(unittest.TestCase):
 
     def test_alta(self):
         # pre-condiciones: no hay socios registrados
-        self.assertEqual(len(self.ns.todos()), 0)
+        self.assertEqual(len(self.ns.todos()), 3)
 
         # ejecuto la logica
         socio = Socio(dni=12345678, nombre='Juan', apellido='Perez')
