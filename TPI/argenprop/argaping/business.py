@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
-#from models import Propiedad
+from argaping.models import Propiedad
 
 url = "https://www.argenprop.com/departamento-alquiler-partido-rosario"
 # Manda la GET request

@@ -32,7 +32,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'argaping.apps.ArgapingConfig',
-    'argaping.business'
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
