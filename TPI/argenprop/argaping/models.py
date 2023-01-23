@@ -13,10 +13,10 @@ class Propiedad(models.Model):
     class Meta:
         verbose_name_plural = 'Propiedades'
     id_prop = models.IntegerField(primary_key=True)
-    precio = models.IntegerField(null=False)
-    calle = models.CharField(max_length=250)
-    nro = models.CharField(max_length=6)
+    direccion = models.CharField(max_length=250)
     barrio = models.ForeignKey(Barrio, on_delete=models.CASCADE)
+    moneda = models.CharField(max_length=5)
+    precio = models.IntegerField(null=False)
     def __str__(self):
         return self.calle + " " + self.nro
 
