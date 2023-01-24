@@ -16,7 +16,7 @@ def load_db():
         direccion = info.find("h2", {"class": "card__address"}).next_element.strip().split(",", 1)[0]
         moneda = "ARS" if info.find("span", {"class": "card__currency"}).next_element.strip() == "$" \
                         else info.find("span", {"class": "card__currency"}).next_element.strip()
-        barrio = info.find("p", {"class": "card__title--primary show-mobile"}).next_element.strip().split(",", 1)[0]
+        barrio = Barrio(info.find("p", {"class": "card__title--primary show-mobile"}).next_element.strip().split(",", 1)[0])
         #query = """SELECT nombre from argaping_barrio where nombre = {barrio} """ hay que ver como e esto
         #nos quedamos acá viendo como hacer para buscar si existe el barrio ya, si no existe hay que crearlo
         #falta también poner a barrio para que aparezca bien formateado: primera letra mayus, despues minus
