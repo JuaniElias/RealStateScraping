@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title>My test page</title>
+  </head>
+  <body>
+    {% if output %}
+        <ul>
+            {% for barrio in output %}
+            <li>{{ barrio.nombre }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No barrios are available.</p>
+    {% endif %}
+  </body>
+</html>
