@@ -20,7 +20,7 @@ class Propiedad(models.Model):
     precio = models.DecimalField(max_digits=12, decimal_places=2, null=False)
 
     def __str__(self):
-        return self.calle + " " + self.nro
+        return self.direccion
 
 
 class Filtro(models.Model):
