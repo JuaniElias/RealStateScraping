@@ -1,0 +1,11 @@
+li {
+    color: red;
+}
+body {
+    background: white url("images/Pablo_Turnaround.webp") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+}

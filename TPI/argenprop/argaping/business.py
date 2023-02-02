@@ -16,16 +16,16 @@ def load_db():
     # FindAll
     info_propiedades = doc.findAll("div", {"class": "card__monetary-values"})
 
-    Barrio.objects.all().delete()
     Propiedad.objects.all().delete()
 
     for info in info_propiedades:
         precio = float(info.find("span", {"class": "card__currency"}).next_sibling.text.strip())
+        # Direccion viene con el barrio despues de la coma ("Alberdi al 600, Centro"), el split [0] trae solo la direccion
+        # TODO: editar direccion para que no aparezca ALQUILER
         direccion = info.find("h2", {"class": "card__address"}).next_element.strip().split(",", 1)[0]
         moneda = "ARS" if info.find("span", {"class": "card__currency"}).next_element.strip() == "$" \
-            else info.find("span", {"class": "card__currency"}).next_element.strip()
-        nombre_barrio = \
-            Barrio(info.find("p", {"class": "card__title--primary show-mobile"}).next_element.strip().split(",", 1)[0])
+           else info.find("span", {"class": "card__currency"}).next_element.strip()
+        nombre_barrio = info.find("p", {"class": "card__title--primary show-mobile"}).next_element.strip().split(",", 1)[0]
 
         barrio_actual = Barrio.objects.get_or_create(nombre=nombre_barrio)[0]
 

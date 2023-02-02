@@ -3,16 +3,18 @@
   <head>
     <meta charset="utf-8" />
     <title>My test page</title>
+        {% load static %}
+    <link rel="stylesheet" href="{% static 'argaping/style.css' %}">
   </head>
   <body>
     {% if output %}
         <ul>
-            {% for barrio in output %}
-            <li>{{ barrio.nombre }}</li>
+            {% for props in output %}
+            <li>{{ props.direccion }} -- {{ props.barrio }}</li>
             {% endfor %}
         </ul>
     {% else %}
-        <p>No barrios are available.</p>
+        <p>No propiedades are available.</p>
     {% endif %}
   </body>
 </html>
