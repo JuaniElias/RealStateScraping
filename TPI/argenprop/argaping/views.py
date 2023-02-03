@@ -12,4 +12,3 @@ def index(request):
     # TODO: Ver como dibujar los barrios en el mapa
     # TODO: Listar las propiedades del barrio que se selecciona en el mapa y mostrar los calculos
     return render(request, 'argaping/load_data.html', context)
-
