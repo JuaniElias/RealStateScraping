@@ -1,8 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
-# TODO: Acomodar que el precio quede corregido con el punto y la coma para convertirlo a decimal (hay que usar locale)
 import locale
-
+from decimal import Decimal
 from argaping.models import Propiedad, Barrio
 
 
@@ -17,16 +16,22 @@ def load_db():
     # FindAll
     info_propiedades = doc.findAll("div", {"class": "card__monetary-values"})
 
+    # Borra las propiedades para cargarlas devuelta
     Propiedad.objects.all().delete()
 
     for info in info_propiedades:
-        precio = float(info.find("span", {"class": "card__currency"}).next_sibling.text.strip())
+        # Setea la ubicación a Argentina para formatear el string de precio bien con los puntos y la coma
+        locale.setlocale(locale.LC_ALL, 'es_AR.UTF8')
+        precio_str = info.find("span", {"class": "card__currency"}).next_sibling.text.strip()
+        precio = Decimal(locale.atof(precio_str)).quantize(Decimal("1.00"))
+
         # Direccion viene con el barrio despues de la coma ("Alberdi al 600, Centro"), el split [0] trae solo la
         # direccion
         # TODO: editar direccion para que no aparezca ALQUILER
         direccion = info.find("h2", {"class": "card__address"}).next_element.strip().split(",", 1)[0]
         moneda = "ARS" if info.find("span", {"class": "card__currency"}).next_element.strip() == "$" \
             else info.find("span", {"class": "card__currency"}).next_element.strip()
+
         nombre_barrio = \
             info.find("p", {"class": "card__title--primary show-mobile"}).next_element.strip().split(",", 1)[0]
 
