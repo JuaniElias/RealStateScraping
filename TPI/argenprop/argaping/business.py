@@ -20,7 +20,7 @@ def load_db():
 
     for info in info_propiedades:
         precio = float(info.find("span", {"class": "card__currency"}).next_sibling.text.strip())
-        # Direccion viene con el barrio despues de la coma ("Alberdi al 600, Centro"), el split [0] trae solo la direccion
+    # Direccion viene con el barrio despues de la coma ("Alberdi al 600, Centro"), el split [0] trae solo la direccion
         # TODO: editar direccion para que no aparezca ALQUILER
         direccion = info.find("h2", {"class": "card__address"}).next_element.strip().split(",", 1)[0]
         moneda = "ARS" if info.find("span", {"class": "card__currency"}).next_element.strip() == "$" \

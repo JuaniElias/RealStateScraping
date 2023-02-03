@@ -4,17 +4,53 @@
     <meta charset="utf-8" />
     <title>My test page</title>
         {% load static %}
-    <link rel="stylesheet" href="{% static 'argaping/style.css' %}">
+      <!-- Bootstrap CSS only -->
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Custom CSS -->
+      <link rel="stylesheet" href="{% static 'argaping/style.css' %}?{% now "U" %}">
+
   </head>
   <body>
-    {% if output %}
-        <ul>
-            {% for props in output %}
-            <li>{{ props.direccion }} -- {{ props.barrio }}</li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No propiedades are available.</p>
-    {% endif %}
+ <div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark top">
+
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="navbar-toggler-icon"></span>   
+				</button> <a class="navbar-brand" href="../admin/">Argenprop Scraping</a>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="navbar-nav">
+						<li class="nav-item dropdown">
+							 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">Nuestros GitHub</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+								 <a class="dropdown-item" href="https://github.com/lucasscarano" target="_blank">Lucas Scarano</a> <a class="dropdown-item" href="https://github.com/JuaniElias" target="_blank">Juan Ignacio Elias</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</nav>
+            <div class="row">
+				<div class="col-md-4">
+                {% if output %}
+                    <ul>
+                        {% for props in output %}
+                        <li>{{ props.direccion }} -- {{ props.barrio }}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No propiedades are available.</p>
+                {% endif %}
+				</div>
+				<div class="col-md-8">
+                    <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-60.767440795898445%2C-33.00204139852613%2C-60.58650970458985%2C-32.915620722282405&amp;layer=mapnik" style="border: 1px solid black"></iframe>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   </body>
 </html>
