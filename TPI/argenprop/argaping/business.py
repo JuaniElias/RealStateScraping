@@ -3,12 +3,14 @@ import requests
 import locale
 from decimal import Decimal
 from argaping.models import Propiedad, Barrio
+import re
 
 
 def load_db():
     # Borra las propiedades para cargarlas devuelta
     Propiedad.objects.all().delete()
     tipos = ['alquiler', 'venta']
+    forbidden_words = re.compile(r"(\b)alquiler(\b)|(\b)muy(\b)|(\b)lindo(\b)|,|(\b)al (\b)|(\b)departamento(\b)", re.IGNORECASE)
     for tipo in tipos:
         pagina = 1
         while True:
@@ -34,8 +36,8 @@ def load_db():
 
                     # Direccion viene con el barrio despues de la coma ("Alberdi al 600, Centro"), el split [0] trae solo la
                     # direccion
-                    # TODO: editar direccion para que no aparezca ALQUILER
                     direccion = info.find("h2", {"class": "card__address"}).next_element.strip().split(",", 1)[0]
+                    direccion = forbidden_words.sub("", direccion).strip()
                     moneda = "ARS" if info.find("span", {"class": "card__currency"}).next_element.strip() == "$" \
                         else info.find("span", {"class": "card__currency"}).next_element.strip()
 
@@ -49,5 +51,3 @@ def load_db():
                     propiedad_actual.save()
                 except AttributeError:
                     pass
-
-
