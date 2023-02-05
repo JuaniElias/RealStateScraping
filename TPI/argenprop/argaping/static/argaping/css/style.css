@@ -10,8 +10,4 @@ body {
   min-height: 100vh;
 }
 
-.mapa{
-    min-height: 80vh;
-    min-width: 200vh;
-    filter: grayscale(80%) invert(92%) contrast(83%);
-}
+#map { height: 80vh; }
