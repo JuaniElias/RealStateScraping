@@ -14,7 +14,7 @@
  <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark top">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark">
 
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 					<span class="navbar-toggler-icon"></span>
@@ -24,28 +24,27 @@
 						<li class="nav-item dropdown">
 							 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">Nuestros GitHub</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-								 <a class="dropdown-item" href="https://github.com/lucasscarano" target="_blank">Lucas Scarano</a> <a class="dropdown-item" href="https://github.com/JuaniElias" target="_blank">Juan Ignacio Elias</a>
+                                 <a class="dropdown-item" href="https://github.com/lucasscarano" target="_blank">Lucas Scarano</a> <a class="dropdown-item" href="https://github.com/JuaniElias" target="_blank">Juan Ignacio Elias</a>
 							</div>
 						</li>
 					</ul>
 				</div>
 			</nav>
-            <div class="row">
-				<div class="col-md-4">
-                {% if output %}
-                    <ul>
-                        {% for props in output %}
-                        <li>{{ props.direccion }} -- {{ props.barrio }}</li>
-                        {% endfor %}
-                    </ul>
-                {% else %}
-                    <p>No propiedades are available.</p>
-                {% endif %}
-				</div>
-				<div class="col-md-8">
-                    <iframe class="mapa" src="https://www.openstreetmap.org/export/embed.html?bbox=-60.767440795898445%2C-33.00204139852613%2C-60.58650970458985%2C-32.915620722282405&amp;layer=mapnik" style="border: 1px solid black"></iframe>
+			<div class="dropdown">
+
+				<button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+					Operación
+				</button>
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+					 <a class="dropdown-item" href="#">Alquiler</a> <a class="dropdown-item" href="#">Venta</a>
 				</div>
 			</div>
+            <div>
+                <iframe class="mapa" src="https://www.openstreetmap.org/export/embed.html?bbox=-60.767440795898445%2C-33.00204139852613%2C-60.58650970458985%2C-32.915620722282405&amp;layer=mapnik" style="border: 1px solid black"></iframe>
+            </div>
+            <form action="#" method="get">
+             <input type="submit" class="btn btn-warning" value="Actualizar Base de datos" name="btnReloadDB">
+            </form>
 		</div>
 	</div>
 </div>
