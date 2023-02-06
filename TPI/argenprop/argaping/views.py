@@ -9,8 +9,8 @@ def index(request):
     # load_db()
     prop_list = Propiedad.objects.all()
     context = {'output': prop_list}
-    # TODO: Listar las propiedades del barrio que se selecciona en el mapa y mostrar los calculos
-    # TODO: Hacer funcionar el botón de filtro alquiler o venta
+    # TODO: Mostrar cálculos. Promedios de alquiler y venta. Si no se encontrara uno de los dos mostrar mensaje acorde.
+    # TODO: Recordar que solo vamos a mostrar aquellos barrios que tienen más de 5 propiedades en la DB.
     if request.GET.get('btnReloadDB'):
         load_db()
     return render(request, 'argaping/load_data.html', context)

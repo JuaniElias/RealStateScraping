@@ -53,3 +53,6 @@ def load_db():
                     propiedad_actual.save()
                 except AttributeError:
                     pass
+
+# TODO: Hacer cálculos de promedios por barrios y por tipo de operación.
+# TODO: Pasar diccionario resultante al archivo JS para mostrar en el HTML.
