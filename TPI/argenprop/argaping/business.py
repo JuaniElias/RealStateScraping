@@ -10,7 +10,8 @@ def load_db():
     # Borra las propiedades para cargarlas devuelta
     Propiedad.objects.all().delete()
     tipos = ['alquiler', 'venta']
-    forbidden_words = re.compile(r"(\b)alquiler(\b)|(\b)muy(\b)|(\b)lindo(\b)|,|(\b)al (\b)|(\b)departamento(\b)", re.IGNORECASE)
+    forbidden_words = re.compile(r"(\b)alquiler(\b)|(\b)muy(\b)|(\b)lindo(\b)|,|(\b)al (\b)|(\b)departamento(\b)",
+                                 re.IGNORECASE)
     for tipo in tipos:
         pagina = 1
         while True:
@@ -42,7 +43,8 @@ def load_db():
                         else info.find("span", {"class": "card__currency"}).next_element.strip()
 
                     nombre_barrio = \
-                        info.find("p", {"class": "card__title--primary show-mobile"}).next_element.strip().split(",", 1)[0]
+                        info.find("p", {"class": "card__title--primary show-mobile"}).next_element.strip().split(",",
+                                                                                                                 1)[0]
 
                     barrio_actual = Barrio.objects.get_or_create(nombre=nombre_barrio)[0]
 

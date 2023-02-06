@@ -9,7 +9,6 @@ def index(request):
     # load_db()
     prop_list = Propiedad.objects.all()
     context = {'output': prop_list}
-    # TODO: Usar la solución de LeafletJS para dibujar los barrios
     # TODO: Listar las propiedades del barrio que se selecciona en el mapa y mostrar los calculos
     # TODO: Hacer funcionar el botón de filtro alquiler o venta
     if request.GET.get('btnReloadDB'):
