@@ -3,17 +3,16 @@
   <head>
     <meta charset="utf-8" />
     <title>My test page</title>
-        {% load static %}
+      {% load static %}
       <!-- Bootstrap CSS only -->
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <!-- Custom CSS -->
+      <!-- Custom CSS -->
       <link rel="stylesheet" href="{% static 'argaping/css/style.css' %}?{% now "U" %}">
       <!--Leaflet-->
-      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
-      <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+      <link rel="stylesheet" href={% static 'argaping/css/leaflet.css' %} />
+      <script src="{% static 'argaping/js/leaflet.js' %}"></script>
       <script src="{% static 'argaping/js/load_barrios.js' %}"></script>
-      <!--Ajax-->
-      <script src="{% static 'argaping/js/leaflet.ajax.min.js' %}"></script>
+
   </head>
   <body>
  <div class="container-fluid">
