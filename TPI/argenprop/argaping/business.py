@@ -76,10 +76,8 @@ def load_db():
 
 # TODO: Pasar JSON resultante al archivo JS.
 
-def load_json():
+def load_json(operacion: str, moneda: str):
     # TODO: Cambiar barrio id por barrio nombre a través de un inner join ?.
-    avg_alquiler = list(Propiedad.objects.values("barrio").filter(tipo_operacion='alquiler').annotate(average=Avg("precio_ars")))
-    avg_venta = list(Propiedad.objects.values("barrio").filter(tipo_operacion='venta').annotate(average=Avg("precio_usd")))
+    promedios_barrio = list(Propiedad.objects.values("barrio").filter(tipo_operacion=operacion).annotate(average=Avg(moneda)))
 
-    print("alquileres", avg_alquiler)
-    print("venta", avg_venta)
+    return promedios_barrio
