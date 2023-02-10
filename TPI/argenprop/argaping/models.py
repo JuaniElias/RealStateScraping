@@ -17,7 +17,8 @@ class Propiedad(models.Model):
     direccion = models.CharField(max_length=250)
     barrio = models.ForeignKey(Barrio, on_delete=models.CASCADE)
     moneda = models.CharField(max_length=5)
-    precio = models.DecimalField(max_digits=12, decimal_places=2, null=False)
+    precio_ars = models.DecimalField(max_digits=18, decimal_places=2, null=False)
+    precio_usd = models.DecimalField(max_digits=12, decimal_places=2, null=False)
     tipo_operacion = models.CharField(max_length=15)
 
     def __str__(self):
