@@ -3,6 +3,8 @@ import requests
 import locale
 from decimal import Decimal
 from django.db.models import Avg, Max, Min
+from django.db.models.functions import Round
+
 from argaping.models import Propiedad, Barrio
 import re
 from django.core import serializers
@@ -75,7 +77,7 @@ def load_db():
 
 
 def load_json(operacion: str, moneda: str):
-    # TODO: Cambiar barrio id por barrio nombre a través de un inner join ?.
-    promedios_barrio = Propiedad.objects.values("barrio").filter(tipo_operacion=operacion).annotate(average=Avg(moneda))
+    promedios_barrio = Propiedad.objects.values("barrio__nombre").filter(tipo_operacion=operacion).annotate(average=Round(Avg(moneda)), max=Max(moneda), min=Min(moneda))
+    print(promedios_barrio)
     #promedios_barrio = Barrio.objects.all()
     return promedios_barrio

@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from argaping.business import load_db, load_json
 from argaping.models import Propiedad, Barrio
-import json
-from django.http import JsonResponse
 
 
 # Create your views here.
+
+# TODO: Hacer que al clickear cada barrio aparezca su info.
+# TODO: (Opcional) Mostrar la info del barrio en un Popper de esos.
 
 def index(request):
     # load_db()
