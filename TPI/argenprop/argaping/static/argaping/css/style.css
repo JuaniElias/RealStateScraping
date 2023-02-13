@@ -13,6 +13,16 @@ body {
 
 #map { height: 85vh; }
 
+#tooltip {
+  display: inline-block;
+  background: #ffffff;
+  color: #643045;
+  font-weight: bold;
+  padding: 5px 10px;
+  font-size: 13px;
+  border-radius: 4px;
+}
+
 .info {
     padding: 6px 8px;
     font: 14px/16px Arial, Helvetica, sans-serif;
