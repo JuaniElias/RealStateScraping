@@ -172,7 +172,7 @@ window.addEventListener('load',function() {
         info.update = function (props) {
             this._div.innerHTML = (props ? '<h4>' + props.name + '</h4><br />' : '<h4>Pasa el mouse por arriba</h4>');
         };
-        console.log("chatgptrocks")
+
         info.addTo(map);
 
         function style(feature) {
