@@ -78,6 +78,5 @@ def load_db():
 
 def load_json(operacion: str, moneda: str):
     promedios_barrio = Propiedad.objects.values("barrio__nombre").filter(tipo_operacion=operacion).annotate(average=Round(Avg(moneda)), max=Max(moneda), min=Min(moneda))
-    print(promedios_barrio)
-    #promedios_barrio = Barrio.objects.all()
+
     return promedios_barrio

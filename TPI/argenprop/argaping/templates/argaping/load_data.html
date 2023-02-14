@@ -11,47 +11,48 @@
       <!--Leaflet-->
       <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
       <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
-      <script src="{% static 'argaping/js/load_barrios.js' %}"></script>
-      <!--Ajax-->
-      <script src="{% static 'argaping/js/leaflet.ajax.min.js' %}"></script>
+
   </head>
   <body>
- <div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-			<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark">
-
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="navbar-toggler-icon"></span>
-				</button> <a class="navbar-brand" href="../admin/">Argenprop Scraping</a>
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="navbar-nav">
-						<li class="nav-item dropdown">
-							 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">Nuestros GitHub</a>
-							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                 <a class="dropdown-item" href="https://github.com/lucasscarano" target="_blank">Lucas Scarano</a> <a class="dropdown-item" href="https://github.com/JuaniElias" target="_blank">Juan Ignacio Elias</a>
-							</div>
-						</li>
-					</ul>
-				</div>
-			</nav>
-            <div id='map'>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="../admin/">Argenprop Scraping</a>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">Nuestros GitHub</a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="https://github.com/lucasscarano" target="_blank">Lucas Scarano</a>
+                    <a class="dropdown-item" href="https://github.com/JuaniElias" target="_blank">Juan Ignacio Elias</a>
+                  </div>
+                </li>
+              </ul>
             </div>
+          </nav>
 
-            <script>show_mapa()</script>
+          <div id='map'></div>
+          <script src="{% static 'argaping/js/load_barrios_in_map.js' %}" defer></script>
 
-            <form action="#" method="get">
-             <input type="submit" class="btn btn-warning" value="Actualizar Base de datos" name="btnReloadDB">
-            </form>
-		</div>
-	</div>
-</div>
- <div><ul>
-    {% for key in promedios_alquiler.all %}
-        <li>barrio: {{ key.barrio__nombre }} - average: {{ key.average }} - max: {{ key.max }} - min: {{ key.min }}</li>
-    {% endfor %}
-</ul></div>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+          <form action="#" method="get">
+            <input type="submit" class="btn btn-warning" value="Actualizar Base de datos" name="btnReloadDB">
+          </form>
+        </div>
+      </div>
+    </div>
+    <div>
+      <ul>
+        {% for key in promedios_alquiler.all %}
+          <li>barrio: {{ key.barrio__nombre }} - average: {{ key.average }} - max: {{ key.max }} - min: {{ key.min }}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.3.slim.min.js" integrity="sha256-ZwqZIVdD3iXNyGHbSYdsmWP//UBokj2FHAxKuSBKDSo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js" integrity="sha512-6UofPqm0QupIL0kzS/UIzekR73/luZdC6i/kXDbWnLOJoqwklBK6519iUnShaYceJ0y4FaiPtX/hRnV/X/xlUQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   </body>
