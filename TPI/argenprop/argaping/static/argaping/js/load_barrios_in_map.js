@@ -1,13 +1,14 @@
-window.addEventListener('load',function() {
-    function show_mapa() {
-        var geojson;
+/*window.addEventListener('load',function() {*/
+    function show_mapa(barriosDataJSON) {
+        var barrioFeature;
+
         var map = L.map('map').setView([-32.935, -60.68], 13);
         var tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
 
-        var barriosRosario = {
+        var barriosRosarioGEOJSON = {
             "type": "FeatureCollection",
             "features": [{
                 "type": "Feature",
@@ -200,7 +201,7 @@ window.addEventListener('load',function() {
         }
 
         function resetHighlight(e) {
-            geojson.resetStyle(e.target);
+            barrioFeature.resetStyle(e.target);
         }
 
         function onEachFeature(feature, layer) {
@@ -210,10 +211,18 @@ window.addEventListener('load',function() {
             });
         }
 
-        geojson = L.geoJson(barriosRosario, {
+        barrioFeature = L.geoJson(barriosRosarioGEOJSON, {
             style: style,
             onEachFeature: onEachFeature
         }).addTo(map);
+
+        console.log(barriosDataJSON)
+        // Add a click event listener for each feature
+        barrioFeature.on('click', function (e) {
+            var neighborhoodName = e.layer.feature.properties.name;
+            var avgRentPrice = barriosDataJSON[neighborhoodName];
+            e.layer.bindPopup("Average Rent Price: " + avgRentPrice).openPopup();
+        });
     }
-    show_mapa();
-});
+/*
+});*/

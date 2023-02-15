@@ -1,12 +1,15 @@
+from django.http import JsonResponse
 from django.shortcuts import render
 from argaping.business import load_db, load_json
-from argaping.models import Propiedad, Barrio
+import json
+from decimal import Decimal
 
 
 # Create your views here.
 
 # TODO: Hacer que al clickear cada barrio aparezca su info.
 # TODO: (Opcional) Mostrar la info del barrio en un Popper de esos.
+
 
 def index(request):
     # load_db()
@@ -20,6 +23,7 @@ def index(request):
         pass
         # load_db()
         # load_json()
-    print(type(promedios_alquiler))
-    context = {'promedios_alquiler': promedios_alquiler}
-    return render(request, 'argaping/load_data.html', context)
+
+    promedios_alquiler_json = json.dumps(promedios_alquiler)
+    print(type(promedios_alquiler_json))
+    return render(request, 'argaping/load_data.html', {"promedios_alquiler_json": promedios_alquiler_json})
