@@ -216,12 +216,12 @@
             onEachFeature: onEachFeature
         }).addTo(map);
 
-        console.log(barriosDataJSON)
-        // Add a click event listener for each feature
         barrioFeature.on('click', function (e) {
-            var neighborhoodName = e.layer.feature.properties.name;
-            var avgRentPrice = barriosDataJSON[neighborhoodName];
-            e.layer.bindPopup("Average Rent Price: " + avgRentPrice).openPopup();
+            var barrio = barriosDataJSON.find(item => item.barrio__nombre === e.layer.feature.properties.name)
+            var promedio = barrio.average
+            var minimo = barrio.minimo
+            var maximo = barrio.maximo
+            e.layer.bindPopup("Precio promedio de alquiler: $" + promedio + "Precio mas bajo: $" + minimo + "Precio mas alto: $" + maximo).openPopup();
         });
     }
 /*
