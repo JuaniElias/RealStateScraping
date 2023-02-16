@@ -49,15 +49,11 @@
       </div>
     </div>
     <div>
-      <ul>
-        {% for key in promedios_alquiler.all %}
-          <li>barrio: {{ key.barrio__nombre }} - average: {{ key.average }} - max: {{ key.max }} - min: {{ key.min }}
-          </li>
-        {% endfor %}
-      </ul>
+
     <script>
         show_mapa({{ promedios_alquiler_json|safe }})
     </script>
+
     </div>
     <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js" integrity="sha512-6UofPqm0QupIL0kzS/UIzekR73/luZdC6i/kXDbWnLOJoqwklBK6519iUnShaYceJ0y4FaiPtX/hRnV/X/xlUQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
