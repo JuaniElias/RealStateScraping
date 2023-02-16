@@ -221,7 +221,7 @@
             var promedio = barrio.average
             var minimo = barrio.minimo
             var maximo = barrio.maximo
-            e.layer.bindPopup("Precio promedio de alquiler: $" + promedio + "Precio mas bajo: $" + minimo + "Precio mas alto: $" + maximo).openPopup();
+            e.layer.bindPopup("Precio promedio de alquiler: $" + promedio + "<br>Precio mas bajo: $" + minimo + "<br>Precio mas alto: $" + maximo).openPopup();
         });
     }
 /*
