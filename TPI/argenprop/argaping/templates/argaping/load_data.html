@@ -37,6 +37,11 @@
                 </li>
               </ul>
             </div>
+            <div class="switch-button">
+              <input id="cbxTipoOperacion" class="switch-button-checkbox" onclick='show_mapa().reload_data({{ data_alquiler_json|safe }}, {{ data_venta_json|safe }})' type="checkbox">
+              <label class="switch-button-label"><span class="switch-button-label-span">Alquiler</span></label>
+            </div>
+
           </nav>
 
           <div id='map'></div>
@@ -51,7 +56,8 @@
     <div>
 
     <script>
-        show_mapa({{ promedios_alquiler_json|safe }})
+
+        show_mapa({{ data_alquiler_json|safe }}, {{ data_venta_json|safe }})
     </script>
 
     </div>

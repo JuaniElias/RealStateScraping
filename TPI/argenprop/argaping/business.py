@@ -7,16 +7,13 @@ from django.db.models.functions import Round
 
 from argaping.models import Propiedad, Barrio
 import re
-from django.core import serializers
-from django.http import HttpResponse
-import json
 
 
 def load_db():
     # Borra las propiedades para cargarlas devuelta
     Propiedad.objects.all().delete()
     tipos_operacion = ['alquiler', 'venta']
-    forbidden_words = re.compile(r"(\b)alquiler(\b)|(\b)muy(\b)|(\b)lindo(\b)|,|(\b)al (\b)|(\b)departamento(\b)",
+    forbidden_words = re.compile(r"(\b)alquiler(\b)|,|(\b)al (\b)|(\b)departamento(\b)",
                                  re.IGNORECASE)
 
     # Setea la ubicación a Argentina para formatear el string de precio bien con los puntos y la coma
@@ -70,14 +67,17 @@ def load_db():
                     propiedad_actual = Propiedad(precio_ars=precio_ars, precio_usd=precio_usd, direccion=direccion,
                                                  moneda=moneda, tipo_operacion=tipo)
                     propiedad_actual.barrio = barrio_actual
-                    propiedad_actual.save()
+                    if (tipo == 'venta' and 5000 < precio_usd < 1000000) \
+                            or (tipo == 'alquiler' and precio_ars < 500000):
+                        propiedad_actual.save()
                 except AttributeError:
                     pass
     print("It's loaded!")
 
 
 def load_json(operacion: str, moneda: str):
-    promedios_barrio = list(Propiedad.objects.values("barrio__nombre").filter(tipo_operacion=operacion).annotate(average=Round(Avg(moneda)), maximo=Max(moneda), minimo=Min(moneda)))
+    promedios_barrio = list(Propiedad.objects.values("barrio__nombre").filter(tipo_operacion=operacion)
+                            .annotate(average=Round(Avg(moneda)), maximo=Max(moneda), minimo=Min(moneda)))
 
     for data in promedios_barrio:
         data['average'] = str(data['average'])
