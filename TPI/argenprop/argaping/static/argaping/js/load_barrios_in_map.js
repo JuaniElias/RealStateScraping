@@ -8,7 +8,7 @@ function show_mapa(barriosDataJSON) {
     }).addTo(map);
 
     function loadGeoJSON() {
-  return fetch('argaping/Barrios_de_Rosario.geojson')
+  return fetch('Barrios_de_Rosario.geojson')
     .then(response => response.json())
     .then(data => {
       return data;
@@ -92,7 +92,6 @@ function show_mapa(barriosDataJSON) {
             matchedBarriosLayer.addLayer(barrioFeature);
           }
         });
-      console.log(myData);
     }).catch(error => {
       // Handle any errors that occurred while loading the GeoJSON file.
       console.error(error);
