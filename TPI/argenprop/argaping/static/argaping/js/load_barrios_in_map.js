@@ -1,5 +1,5 @@
-function show_mapa(data_alquiler_json, data_venta_json) {
-    let barrioFeature;
+function show_mapa() {
+
     const map = L.map('map').setView([-32.935, -60.68], 13);
     const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
@@ -68,47 +68,56 @@ function show_mapa(data_alquiler_json, data_venta_json) {
         });
     }
 
-    function reload_data(cbxStatus) {
-        // Solo mostrar los barrios que se consiguieron datos
+
+    var checkbox = document.getElementById("cbxTipoOperacion");
+
+    // Add an event listener to the checkbox
+    checkbox.addEventListener('change', function()
+    {
+        if (this.checked) {
+            // if the checkbox is checked, show venta on the map
+            reload_data(data_venta_json)
+        } else {
+            // if the checkbox is not checked, show alquiler on the map
+            reload_data(data_alquiler_json)
+        }
+    });
+
+    let barrioFeature = undefined;
+    function reload_data(data) {
+        map.eachLayer(function(layer) {
+        if( layer instanceof L.GeoJSON )
+           map.removeLayer(layer);
+        });
         const matchedBarriosLayer = L.layerGroup();
-        let barriosDataJSON
+
         loadGeoJSON().then(barriosRosarioGEOJSON => {
-            // Do something with myData here, such as passing it to another function.
-            let cbxTipoOperacion = document.getElementById("cbxTipoOperacion")
-            if (cbxTipoOperacion.checked) {
-                barriosDataJSON = data_venta_json;
-                console.log("tildao")
-            } else {
-                barriosDataJSON = data_alquiler_json;
-                console.log("nao_tildao")
-            }
-            console.log(barriosDataJSON)
+            // Solo buscar los barrios que se consiguieron datos
             barriosRosarioGEOJSON.features.forEach(function (feature) {
-                const selectedBarriosNames = barriosDataJSON.map(function (barrio) {
+                const selectedBarriosNames = data.map(function (barrio) {
                     return barrio.barrio__nombre;
                 });
 
                 if (selectedBarriosNames.indexOf(feature.properties.name) !== -1) {
                     barrioFeature = L.geoJSON(feature, {
+                        id: 'barrioFeature',
                         style: style,
                         onEachFeature: onEachFeature
                     }).on('click', function (e) {
-                        const barrio = barriosDataJSON.find(item => item.barrio__nombre === e.layer.feature.properties.name)
+                        const barrio = data.find(item => item.barrio__nombre === e.layer.feature.properties.name)
                         const promedio = barrio.average
                         const minimo = barrio.minimo
                         const maximo = barrio.maximo
                         e.layer.bindPopup("AVG: $" + promedio + "<br>MIN: $" + minimo + "<br>MAX: $" + maximo).openPopup();
                     });
-                    matchedBarriosLayer.addLayer(barrioFeature);
+                    matchedBarriosLayer.addLayer(barrioFeature).addTo(map);
                 }
             });
         }).catch(error => {
             // Handle any errors that occurred while loading the GeoJSON file.
             console.error(error);
         });
-        // Add the matchedBarriosLayer to the map
-        matchedBarriosLayer.addTo(map);
     }
-    reload_data();
+    //La primera vez se carga alquiler solo después se maneja con el checkbox
+    reload_data(data_alquiler_json);
 }
-
