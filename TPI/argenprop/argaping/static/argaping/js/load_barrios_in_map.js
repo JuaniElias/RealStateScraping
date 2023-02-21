@@ -108,7 +108,8 @@ function show_mapa() {
                         const promedio = barrio.average
                         const minimo = barrio.minimo
                         const maximo = barrio.maximo
-                        e.layer.bindPopup("AVG: $" + promedio + "<br>MIN: $" + minimo + "<br>MAX: $" + maximo).openPopup();
+                        const cantidad = barrio.cantidad
+                        e.layer.bindPopup("AVG: $" + promedio + "<br>MIN: $" + minimo + "<br>MAX: $" + maximo + "<br>CANT: " + cantidad).openPopup();
                     });
                     matchedBarriosLayer.addLayer(barrioFeature).addTo(map);
                 }

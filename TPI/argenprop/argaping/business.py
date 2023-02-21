@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 import locale
 from decimal import Decimal
-from django.db.models import Avg, Max, Min
+from django.db.models import Avg, Max, Min, Count
 from django.db.models.functions import Round
 
 from argaping.models import Propiedad, Barrio
@@ -77,7 +77,8 @@ def load_db():
 
 def load_json(operacion: str, moneda: str):
     promedios_barrio = list(Propiedad.objects.values("barrio__nombre").filter(tipo_operacion=operacion)
-                            .annotate(average=Round(Avg(moneda)), maximo=Max(moneda), minimo=Min(moneda)))
+                            .annotate(average=Round(Avg(moneda)), maximo=Max(moneda), minimo=Min(moneda),
+                                      cantidad=Count('id')))
 
     for data in promedios_barrio:
         data['average'] = str(data['average'])
