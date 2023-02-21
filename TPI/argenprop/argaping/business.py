@@ -54,10 +54,10 @@ def load_db():
                         else info.find("span", {"class": "card__currency"}).next_element.strip()
                     if moneda == 'ARS':
                         precio_ars = Decimal(locale.atof(precio_str)).quantize(Decimal("1.00"))
-                        precio_usd = precio_ars / precio_dolar_actual
+                        precio_usd = round(precio_ars / precio_dolar_actual)
                     else:
                         precio_usd = Decimal(locale.atof(precio_str)).quantize(Decimal("1.00"))
-                        precio_ars = precio_usd * precio_dolar_actual
+                        precio_ars = round(precio_usd * precio_dolar_actual)
                     nombre_barrio = \
                         info.find("p", {"class": "card__title--primary show-mobile"}).next_element.strip().split(",",
                                                                                                                  1)[0]
