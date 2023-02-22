@@ -1,9 +1,12 @@
 function show_mapa() {
 
-    const map = L.map('map').setView([-32.935, -60.68], 13);
+    const map = L.map('map').setView([-32.935, -60.67],12);
     const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        zoomSnap: 0.25,
+        minZoom: 12,
+        maxZoom: 15,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        className: 'map-tiles'
     }).addTo(map);
 
     function loadGeoJSON() {
