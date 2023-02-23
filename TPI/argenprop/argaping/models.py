@@ -4,9 +4,16 @@ from django.db.models.functions import Round
 
 
 # Create your models here.
+class Ciudad(models.Model):
+    nombre = models.CharField(null=False, blank=False, max_length=250, unique=True)
+
+    def __str__(self):
+        return self.nombre
+
 
 class Barrio(models.Model):
     nombre = models.CharField(null=False, blank=False, max_length=250, unique=True)
+    ciudad = models.ForeignKey(Ciudad, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.nombre
@@ -42,7 +49,7 @@ class Propiedad(models.Model):
 
 
 class Filtro(models.Model):
-    nombre = models.CharField(null=False, blank=False, max_length=250)
+    tipo_operacion = models.CharField(null=False, blank=False, max_length=25)
 
     def __str__(self):
         return self.nombre
