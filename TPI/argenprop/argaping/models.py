@@ -36,6 +36,10 @@ class Propiedad(models.Model):
                     .annotate(average=Round(Avg(precio)), maximo=Max(precio), minimo=Min(precio)
                               , cantidad=Count('id')))
 
+    @classmethod
+    def delete_data(cls):
+        Propiedad.objects.all().delete()
+
 
 class Filtro(models.Model):
     nombre = models.CharField(null=False, blank=False, max_length=250)

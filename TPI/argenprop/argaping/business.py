@@ -2,16 +2,13 @@ from bs4 import BeautifulSoup
 import requests
 import locale
 from decimal import Decimal
-from django.db.models import Avg, Max, Min, Count
-from django.db.models.functions import Round
-
 from argaping.models import Propiedad, Barrio
 import re
 
 
 def load_db():
     # Borra las propiedades para cargarlas devuelta
-    Propiedad.objects.all().delete()
+    Propiedad.delete_data()
     tipos_operacion = ['alquiler', 'venta']
     forbidden_words = re.compile(r"(\b)alquiler(\b)|,|(\b)al (\b)|(\b)departamento(\b)",
                                  re.IGNORECASE)
