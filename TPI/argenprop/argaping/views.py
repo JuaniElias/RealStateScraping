@@ -8,8 +8,8 @@ def index(request):
     if request.GET.get('btnReloadDB'):
         load_db()
 
-    data_alquiler = load_json("alquiler", "precio_ars")
-    data_venta = load_json("venta", "precio_usd")
+    data_alquiler = load_json("alquiler")
+    data_venta = load_json("venta")
 
     data_alquiler_json = json.dumps(data_alquiler)
     data_venta_json = json.dumps(data_venta)

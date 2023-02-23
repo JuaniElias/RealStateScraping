@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models import Avg, Max, Min, Count
+from django.db.models.functions import Round
 
 
 # Create your models here.
@@ -23,6 +25,16 @@ class Propiedad(models.Model):
 
     def __str__(self):
         return self.direccion
+
+    def get_barrio(self):
+        return self.barrio
+
+    @classmethod
+    def get_data_barrios(cls, operacion: str):
+        precio = 'precio_usd' if operacion == 'venta' else 'precio_ars'
+        return list(Propiedad.objects.all().values("barrio__nombre").filter(tipo_operacion=operacion) \
+                    .annotate(average=Round(Avg(precio)), maximo=Max(precio), minimo=Min(precio)
+                              , cantidad=Count('id')))
 
 
 class Filtro(models.Model):
