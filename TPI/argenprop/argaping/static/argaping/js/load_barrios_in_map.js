@@ -1,7 +1,7 @@
 function show_mapa() {
 
     const map = L.map('map').setView([-32.935, -60.67],12);
-    const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         zoomSnap: 0.25,
         minZoom: 12,
         maxZoom: 15,
@@ -24,7 +24,7 @@ function show_mapa() {
 
     const info = L.control();
 
-    info.onAdd = function (map) {
+    info.onAdd = function () {
         this._div = L.DomUtil.create('div', 'info');
         this.update();
         return this._div;
@@ -72,16 +72,19 @@ function show_mapa() {
     }
 
 
-    var checkbox = document.getElementById("cbxTipoOperacion");
+    let checkbox = document.getElementById("cbxTipoOperacion");
+    let state = 'alquiler'
 
     // Add an event listener to the checkbox
     checkbox.addEventListener('change', function()
     {
         if (this.checked) {
             // if the checkbox is checked, show venta on the map
+            state = 'venta'
             reload_data(data_venta_json)
         } else {
             // if the checkbox is not checked, show alquiler on the map
+            state = 'alquiler'
             reload_data(data_alquiler_json)
         }
     });
@@ -112,7 +115,12 @@ function show_mapa() {
                         const minimo = barrio.minimo
                         const maximo = barrio.maximo
                         const cantidad = barrio.cantidad
+                        if (state === 'alquiler'){
                         e.layer.bindPopup("AVG: $" + promedio + "<br>MIN: $" + minimo + "<br>MAX: $" + maximo + "<br>CANT: " + cantidad).openPopup();
+                        } else {
+                        e.layer.bindPopup("AVG: U$D " + promedio + "<br>MIN: U$D " + minimo + "<br>MAX: U$D " + maximo + "<br>CANT: " + cantidad).openPopup();
+
+                        }
                     });
                     matchedBarriosLayer.addLayer(barrioFeature).addTo(map);
                 }

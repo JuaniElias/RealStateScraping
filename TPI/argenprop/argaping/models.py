@@ -39,9 +39,8 @@ class Propiedad(models.Model):
     @classmethod
     def get_data_barrios(cls, operacion: str):
         precio = 'precio_usd' if operacion == 'venta' else 'precio_ars'
-        return list(Propiedad.objects.all().values("barrio__nombre").filter(tipo_operacion=operacion) \
-                    .annotate(average=Round(Avg(precio)), maximo=Max(precio), minimo=Min(precio)
-                              , cantidad=Count('id')))
+        return list(Propiedad.objects.all().values("barrio__nombre").filter(tipo_operacion=operacion)
+                    .annotate(average=Round(Avg(precio)), maximo=Max(precio), minimo=Min(precio), cantidad=Count('id')))
 
     @classmethod
     def delete_data(cls):
@@ -52,4 +51,4 @@ class Filtro(models.Model):
     tipo_operacion = models.CharField(null=False, blank=False, max_length=25)
 
     def __str__(self):
-        return self.nombre
+        return self.tipo_operacion
