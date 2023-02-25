@@ -17,15 +17,14 @@ body {
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
-	min-height: 100vh;
-	display: flex;
+
 	align-items: center;
 	justify-content: center;
-	height: 100vh;
+	min-height: 95vh;
 	font-family: sans-serif;
 }
 
-#map { height: calc(90vh - 50px) ; }
+#map { height: calc(100vh - 60px) ; }
 
 #tooltip {
   display: inline-block;
@@ -35,6 +34,13 @@ body {
   padding: 5px 10px;
   font-size: 13px;
   border-radius: 4px;
+}
+
+.navbar {
+  background-color: #333;
+  color: #fff;
+  height: 60px;
+  padding: 10px 20px;
 }
 
 .info {
@@ -118,6 +124,10 @@ body {
  .switch-button-checkbox + .switch-button-label .switch-button-label-span {
 	 position: relative;
 }
+.row{
+	--bs-gutter-x: 0;
+}
+
 .container-fluid{
 	--bs-gutter-x: 0;
 }
