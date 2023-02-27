@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-)x=7!x^pp#gs5g=y8*-8a93p#2i1x!!fm7-cws5ob!7_6n*4^j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -113,8 +113,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'argaping', 'static'),
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
-STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join('static')
+STATIC_URL = '/argenprop/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
