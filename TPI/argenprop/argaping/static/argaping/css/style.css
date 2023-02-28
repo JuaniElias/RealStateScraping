@@ -43,13 +43,28 @@ body {
   padding: 10px 20px;
 }
 
-.info {
-    padding: 6px 8px;
-    font: 14px/16px Arial, Helvetica, sans-serif;
-    background: white;
-    background: rgba(255,255,255,0.8);
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
-    border-radius: 5px;
+ .modal-content{
+     background-color: #212529;
+ }
+ .modal-header {
+	 padding-top: 14px;
+	 padding-bottom: 14px;
+	 padding-left: 30px;
+	 border-bottom: 0;
+  }
+ .modal-body{
+	 padding-bottom: 0;
+ }
+.modal-footer {
+	 border-top: 0;
+}
+ .info {
+     padding: 6px 8px;
+     font: 14px/16px Arial, Helvetica, sans-serif;
+     background: white;
+     background: rgba(255,255,255,0.8);
+     box-shadow: 0 0 15px rgba(0,0,0,0.2);
+     border-radius: 5px;
 }
 
 .info h4 {

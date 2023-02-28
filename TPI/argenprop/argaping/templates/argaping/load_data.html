@@ -33,11 +33,34 @@
                     <a class="dropdown-item" href="https://github.com/JuaniElias" target="_blank">Juan Ignacio Elias</a>
                   </div>
                 </li>
-                  <form action="#" method="get">
-                    <input type="submit" class="btn btn-warning" value="Actualizar Base de datos" name="btnReloadDB">
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#scrapeWarningModal">
+                    Actualizar Base de Datos
+                  </button>
+
+                  <!-- Modal -->
+                  <form method="post">
+                    {% csrf_token %}
+                    <div class="modal fade" id="scrapeWarningModal" tabindex="-1" aria-labelledby="scrapeWarningModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="scrapeWarningModalLabel" style="font-weight: bold">Está seguro?</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <p>Actualizar la base de datos eliminará todas las propiedades y demorará unos minutos</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <input id="btnReloadDB" type="submit" class="btn btn-warning" data-dismiss="modal" name="btnReloadDB" value="Actualizar">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </form>
-              </ul>
-            </div>
+                </ul>
+              </div>
             <div class="switch-button">
               <input id="cbxTipoOperacion" class="switch-button-checkbox" type="checkbox">
               <label class="switch-button-label"><span class="switch-button-label-span">Alquiler</span></label>

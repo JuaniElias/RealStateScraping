@@ -5,7 +5,7 @@ import json
 
 # Create your views here.
 def index(request):
-    if request.GET.get('btnReloadDB'):
+    if request.method == 'POST' and request.POST.get('btnReloadDB'):
         load_db()
 
     data_alquiler = load_json("alquiler")
