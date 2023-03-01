@@ -115,12 +115,10 @@ function show_mapa() {
                         const minimo = barrio.minimo
                         const maximo = barrio.maximo
                         const cantidad = barrio.cantidad
-                        if (state === 'alquiler'){
-                        e.layer.bindPopup("AVG: $" + promedio + "<br>MIN: $" + minimo + "<br>MAX: $" + maximo + "<br>CANT: " + cantidad).openPopup();
-                        } else {
-                        e.layer.bindPopup("AVG: U$D " + promedio + "<br>MIN: U$D " + minimo + "<br>MAX: U$D " + maximo + "<br>CANT: " + cantidad).openPopup();
-
-                        }
+                        let currency = "$"
+                        if (state === 'venta'){
+                            currency = "U$D"}
+                        e.layer.bindPopup("<b>Precio promedio: </b>" + currency + promedio + "<br><b>Mínimo: </b>" + currency + minimo + "<br> <b>Máximo: </b>"+ currency + maximo + "<br><b>Propiedades encontradas: </b>" + cantidad).openPopup();
                     });
                     matchedBarriosLayer.addLayer(barrioFeature).addTo(map);
                 }

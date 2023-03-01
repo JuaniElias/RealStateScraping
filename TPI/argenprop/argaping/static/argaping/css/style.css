@@ -139,6 +139,14 @@ body {
  .switch-button-checkbox + .switch-button-label .switch-button-label-span {
 	 position: relative;
 }
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+	background: #212529;
+	color: #ffffff;
+	font-size: 13px;
+	}
+
 .row{
 	--bs-gutter-x: 0;
 }
