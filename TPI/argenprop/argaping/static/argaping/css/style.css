@@ -55,22 +55,21 @@ body {
  .modal-body{
 	 padding-bottom: 0;
  }
-.modal-footer {
+ .modal-footer {
 	 border-top: 0;
 }
  .info {
      padding: 6px 8px;
-     font: 14px/16px Arial, Helvetica, sans-serif;
-     background: white;
-     background: rgba(255,255,255,0.8);
+     font: 14px/2px Arial, Helvetica, sans-serif;
+     background: rgb(33, 37, 41);
      box-shadow: 0 0 15px rgba(0,0,0,0.2);
      border-radius: 5px;
 }
 
 .info h4 {
     font-weight: bold;
-    margin: 0 0 5px;
-    color: #777;
+	margin-bottom: 0;
+    color: #ffffff;
 }
 
 
@@ -83,8 +82,9 @@ body {
 	 width: 240px;
 	 text-align: center;
 	 font-size: 18px;
+	 line-height: 16px;
 	 letter-spacing: 1px;
-	 color: #000000;
+	 color: #212529;
 	 font-weight: bolder;
 	 position: relative;
 	 padding: 0 120px 0 0;

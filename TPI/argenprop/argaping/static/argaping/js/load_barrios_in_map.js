@@ -31,7 +31,7 @@ function show_mapa() {
     };
 
     info.update = function (props) {
-        this._div.innerHTML = (props ? '<h4>' + props.name + '</h4><br />' : '<h4>Pasa el mouse por arriba</h4>');
+        this._div.innerHTML = (props ? '<h4>Barrio: ' + props.name + '</h4>' : '<h4>Pasa el mouse por arriba</h4>');
     };
 
     info.addTo(map);
