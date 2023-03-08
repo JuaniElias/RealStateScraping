@@ -2,14 +2,18 @@ from bs4 import BeautifulSoup
 import requests
 import locale
 from decimal import Decimal
-from argaping.models import Propiedad, Barrio
+from argaping.models import Ciudad, Barrio, Propiedad, Filtro
 import re
 
 
 def load_db():
     # Borra las propiedades para cargarlas devuelta
-    Propiedad.delete_data()
-    tipos_operacion = ['alquiler', 'venta']
+    #Propiedad.delete_data()
+    # Se carga solo Rosario como ciudad unica por ahora
+    ciudad_actual = Ciudad.objects.first()
+    tipos_operacion = Filtro.objects.all()
+
+    # Lista de palabras para borrar en el nombre de la propiedad
     forbidden_words = re.compile(r"(\b)alquiler(\b)|,|(\b)al (\b)|(\b)departamento(\b)",
                                  re.IGNORECASE)
 
@@ -64,8 +68,10 @@ def load_db():
                     propiedad_actual = Propiedad(precio_ars=precio_ars, precio_usd=precio_usd, direccion=direccion,
                                                  moneda=moneda, tipo_operacion=tipo)
                     propiedad_actual.barrio = barrio_actual
-                    if (tipo == 'venta' and 5000 < precio_usd < 1000000) \
-                            or (tipo == 'alquiler' and precio_ars < 500000):
+
+                    # Descarta los outliers que esten mal cargados con valores predefinidos
+                    if (tipo.tipo_operacion == 'venta' and 5000 < precio_usd < 1000000) \
+                            or (tipo.tipo_operacion == 'alquiler' and precio_ars < 500000):
                         propiedad_actual.save()
                 except AttributeError:
                     pass
