@@ -8,7 +8,7 @@ import re
 
 def load_db():
     # Borra las propiedades para cargarlas devuelta
-    #Propiedad.delete_data()
+    Propiedad.delete_data()
     # Se carga solo Rosario como ciudad unica por ahora
     ciudad_actual = Ciudad.objects.first()
     tipos_operacion = Filtro.objects.all()
@@ -63,7 +63,7 @@ def load_db():
                         info.find("p", {"class": "card__title--primary show-mobile"}).next_element.strip().split(",",
                                                                                                                  1)[0]
 
-                    barrio_actual = Barrio.objects.get_or_create(nombre=nombre_barrio)[0]
+                    barrio_actual = Barrio.objects.get_or_create(nombre=nombre_barrio, ciudad=ciudad_actual)[0]
 
                     propiedad_actual = Propiedad(precio_ars=precio_ars, precio_usd=precio_usd, direccion=direccion,
                                                  moneda=moneda, tipo_operacion=tipo)
