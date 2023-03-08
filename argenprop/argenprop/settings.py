@@ -113,7 +113,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'argaping', 'static'),
 ]
 
-STATIC_ROOT = '/home/juani347/frro-python-2022-04/TPI/argenprop/static'
+STATIC_ROOT = '/home/juani347/RealStateScraping/argenprop/static'
 STATIC_URL = '/static/'
 
 # Default primary key field type
