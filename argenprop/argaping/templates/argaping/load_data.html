@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+  <head>
+    <meta charset="utf-8" />
+    <title>Argenprop Scraping</title>
+    {% load static %}
+      <link rel="shortcut icon" href="{%  static 'argaping/images/favicon.ico' %}">
+    <!-- Bootstrap CSS only -->
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <!--Leaflet-->
+      <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+      <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+    <!-- Custom CSS -->
+      <link rel="stylesheet" type="text/css" href="{% static 'argaping/css/style.css' %}?{% now "U" %}">
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="../admin/">Argenprop Scraping</a>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">Nuestros GitHub</a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="https://github.com/lucasscarano" target="_blank">Lucas Scarano</a>
+                    <a class="dropdown-item" href="https://github.com/JuaniElias" target="_blank">Juan Ignacio Elias</a>
+                  </div>
+                </li>
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#scrapeWarningModal">
+                    Actualizar Base de Datos
+                  </button>
+
+                  <!-- Modal -->
+                  <form method="post">
+                    {% csrf_token %}
+                    <div class="modal fade" id="scrapeWarningModal" tabindex="-1" aria-labelledby="scrapeWarningModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="scrapeWarningModalLabel" style="font-weight: bold">Está seguro?</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <p>Actualizar la base de datos eliminará todas las propiedades y demorará unos minutos</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <input id="btnReloadDB" type="submit" class="btn btn-warning" data-dismiss="modal" name="btnReloadDB" value="Actualizar">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </ul>
+              </div>
+            <div class="switch-button">
+              <input id="cbxTipoOperacion" class="switch-button-checkbox" type="checkbox">
+              <label class="switch-button-label"><span class="switch-button-label-span">Alquiler</span></label>
+            </div>
+          </nav>
+          <div id='map'></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <script>
+        let data_venta_json = {{ data_venta_json|safe }};
+        let data_alquiler_json = {{ data_alquiler_json|safe }};
+      </script>
+      <script type="text/javascript" src="{% static 'argaping/js/load_barrios_in_map.js' %}"></script>
+      <script>show_mapa()</script>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js" integrity="sha512-6UofPqm0QupIL0kzS/UIzekR73/luZdC6i/kXDbWnLOJoqwklBK6519iUnShaYceJ0y4FaiPtX/hRnV/X/xlUQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+
+</html>

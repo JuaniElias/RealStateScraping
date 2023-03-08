@@ -1,0 +1,156 @@
+:root {
+    --map-tiles-filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
+}
+
+
+.map-tiles {
+	filter: var(--map-tiles-filter, none);
+}
+
+
+body {
+	padding: 0;
+	border: 0;
+	margin: 0;
+	background: darkslategrey;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+
+	align-items: center;
+	justify-content: center;
+	min-height: 95vh;
+	font-family: sans-serif;
+}
+
+#map { height: calc(100vh - 60px) ; }
+
+#tooltip {
+  display: inline-block;
+  background: #ffffff;
+  color: #643045;
+  font-weight: bold;
+  padding: 5px 10px;
+  font-size: 13px;
+  border-radius: 4px;
+}
+
+.navbar {
+  background-color: #333;
+  color: #fff;
+  height: 60px;
+  padding: 10px 20px;
+}
+
+ .modal-content{
+     background-color: #212529;
+ }
+ .modal-header {
+	 padding-top: 14px;
+	 padding-bottom: 14px;
+	 padding-left: 30px;
+	 border-bottom: 0;
+  }
+ .modal-body{
+	 padding-bottom: 0;
+ }
+ .modal-footer {
+	 border-top: 0;
+}
+ .info {
+     padding: 6px 8px;
+     font: 14px/2px Arial, Helvetica, sans-serif;
+     background: rgb(33, 37, 41);
+     box-shadow: 0 0 15px rgba(0,0,0,0.2);
+     border-radius: 5px;
+}
+
+.info h4 {
+    font-weight: bold;
+	margin-bottom: 0;
+    color: #ffffff;
+}
+
+
+ .switch-button {
+     box-sizing: border-box;
+	 margin: 0;
+	 background: rgba(255, 255, 255, 0.56);
+	 border-radius: 30px;
+	 overflow: hidden;
+	 width: 240px;
+	 text-align: center;
+	 font-size: 18px;
+	 line-height: 16px;
+	 letter-spacing: 1px;
+	 color: #212529;
+	 font-weight: bolder;
+	 position: relative;
+	 padding: 0 120px 0 0;
+ }
+ .switch-button:before {
+	 content: "Venta";
+	 position: absolute;
+	 top: 0;
+	 bottom: 0;
+	 right: 0;
+	 width: 120px;
+	 display: flex;
+	 align-items: center;
+	 justify-content: center;
+	 z-index: 3;
+	 pointer-events: none;
+}
+ .switch-button-checkbox {
+	 cursor: pointer;
+	 position: absolute;
+	 top: 0;
+	 left: 0;
+	 bottom: 0;
+	 width: 100%;
+	 height: 100%;
+	 opacity: 0;
+	 z-index: 2;
+}
+ .switch-button-checkbox:checked + .switch-button-label:before {
+	 transform: translateX(120px);
+	 transition: transform 300ms linear;
+}
+ .switch-button-checkbox + .switch-button-label {
+	 position: relative;
+	 padding: 15px 0;
+	 display: block;
+	 user-select: none;
+	 pointer-events: none;
+}
+ .switch-button-checkbox + .switch-button-label:before {
+	 content: "";
+	 background: #fff;
+	 height: 100%;
+	 width: 100%;
+	 position: absolute;
+	 left: 0;
+	 top: 0;
+	 border-radius: 30px;
+	 transform: translateX(0);
+	 transition: transform 300ms;
+}
+ .switch-button-checkbox + .switch-button-label .switch-button-label-span {
+	 position: relative;
+}
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+	background: #212529;
+	color: #ffffff;
+	font-size: 13px;
+	}
+
+.row{
+	--bs-gutter-x: 0;
+}
+
+.container-fluid{
+	--bs-gutter-x: 0;
+}
