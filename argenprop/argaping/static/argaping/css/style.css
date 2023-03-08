@@ -66,13 +66,30 @@ body {
      border-radius: 5px;
 }
 
-.info h4 {
+.info h4,h3 {
     font-weight: bold;
 	margin-bottom: 0;
     color: #ffffff;
 }
+.leaflet-bar a {
+	color: white;
+	background-color: #212529;
+	border-color: #ffffff;
+}
+.leaflet-bar a:hover,
+.leaflet-bar a:focus {
+	background-color: #383e44;
+	}
 
-
+.leaflet-bar a.leaflet-disabled {
+	cursor: default;
+	background-color: #212529;
+	color: #bbb;
+	}
+.leaflet-control-zoom-out {
+	background-color: #212529;
+	border-color: #ffffff;
+}
  .switch-button {
      box-sizing: border-box;
 	 margin: 0;

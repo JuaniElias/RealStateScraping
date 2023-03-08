@@ -1,6 +1,6 @@
 function show_mapa() {
 
-    const map = L.map('map').setView([-32.935, -60.67],12);
+    const map = L.map('map').setView([-32.935, -60.67],13);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         zoomSnap: 0.25,
         minZoom: 12,
@@ -31,14 +31,14 @@ function show_mapa() {
     };
 
     info.update = function (props) {
-        this._div.innerHTML = (props ? '<h4>Barrio: ' + props.name + '</h4>' : '<h4>Pasa el mouse por arriba</h4>');
+        this._div.innerHTML = (props ? '<h3>' + props.name + '</h3>' : '<h3>Pasa el mouse por arriba</h3>');
     };
 
     info.addTo(map);
 
     function style() {
         return {
-            fillColor: '#ADA2FF',
+            fillColor: '#212529',
             weight: 2,
             opacity: 1,
             color: 'white',
